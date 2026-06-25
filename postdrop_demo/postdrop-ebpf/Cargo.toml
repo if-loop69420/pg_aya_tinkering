@@ -1,0 +1,17 @@
+[package]
+name = "postdrop-ebpf"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+postdrop-common = { path = "../postdrop-common" }
+
+aya-ebpf = { workspace = true }
+aya-log-ebpf = { workspace = true }
+
+[build-dependencies]
+which = { workspace = true }
+
+[[bin]]
+name = "postdrop"
+path = "src/main.rs"

@@ -1,0 +1,17 @@
+[package]
+name = "postsniff_demo-ebpf"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+postsniff_demo-common = { path = "../postsniff_demo-common" }
+
+aya-ebpf = { workspace = true }
+aya-log-ebpf = { workspace = true }
+
+[build-dependencies]
+which = { workspace = true }
+
+[[bin]]
+name = "postsniff_demo"
+path = "src/main.rs"
