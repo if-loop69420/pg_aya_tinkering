@@ -33,7 +33,7 @@ async fn main() -> anyhow::Result<()> {
     // reach for `Bpf::load_file` instead.
     let mut ebpf = aya::Ebpf::load(aya::include_bytes_aligned!(concat!(
         env!("OUT_DIR"),
-        "/postdrop"
+        "/simple-uprobe-backup"
     )))?;
     match aya_log::EbpfLogger::init(&mut ebpf) {
         Err(e) => {
@@ -53,19 +53,22 @@ async fn main() -> anyhow::Result<()> {
         }
     }
     let Opt { pid } = opt;
-    let scope = UProbeScope::AllProcesses;
-    let program: &mut UProbe = ebpf.program_mut("postdrop").unwrap().try_into()?;
+    let scope = match pid.map(std::num::NonZeroU32::new) {
+        Some(Some(pid)) => UProbeScope::OneProcess(pid),
+        Some(None) => UProbeScope::CallingProcess,
+        None => UProbeScope::AllProcesses,
+    };
+    let program: &mut UProbe = ebpf
+        .program_mut("simple_uprobe_backup")
+        .unwrap()
+        .try_into()?;
     program.load()?;
     let target_binary = match pid {
         Some(p) => format!("/proc/{}/exe", p),
-        None => "/usr/bin/postgres".to_string(),
+        None => "/home/jeremy/workspace/rs/pg_aya_tinkering/simple-uprobe-backup/test_program"
+            .to_string(),
     };
-    debug!(
-        "Attempting to attach to {} with symbol pg_parse_query",
-        target_binary
-    );
-
-    program.attach("pg_parse_query", &target_binary, scope)?;
+    program.attach("print_user_message", &target_binary, scope)?;
 
     let ctrl_c = signal::ctrl_c();
     println!("Waiting for Ctrl-C...");

@@ -3,7 +3,7 @@
 // Project configuration
 #show: typslides.with(
   ratio: "16-9",
-  theme: "bluey",
+  theme: "darky",
   font: "Fira Sans",
   font-size: 20pt,
   link-style: "color",
@@ -18,6 +18,23 @@
   info: [Repo @ #link("https://github.com/if-loop69420/pg_aya_tinkering")],
 )
 
+#title-slide[
+  What is Aya?
+]
+#slide(title: "What's Aya?")[
+  - A pure Rust library for eBPFs not relying on libbpf or bcc
+  - Only uses the libc crate for syscalls
+]
+
+#title-slide[
+  What is eBPF?
+]
+
+#slide(title: "What is eBPF?")[
+  - extended Berkley Packet Filters
+  - Successor to BPF (Berkley Packet Filters)
+  - Add kernel functionality without modules/source code changes
+]
 #slide(title: "What is eBPF?")[
   - extended Berkley Packet Filters
   - Successor to BPF (Berkley Packet Filters)
@@ -27,9 +44,8 @@
   ]
 ]
 
-#slide(title: "What's Aya?")[
-  - A pure Rust library for eBPFs not relying on libbpf or bcc
-  - Only uses the libc crate for syscalls
+#title-slide[
+  So what can you do with that?
 ]
 #slide(title: "So what can you do with that?")[
   - Aya has support for:
@@ -47,3 +63,6 @@
   Let's get to demos!
 ]
 
+#title-slide[
+  Thank you for your attention!
+]

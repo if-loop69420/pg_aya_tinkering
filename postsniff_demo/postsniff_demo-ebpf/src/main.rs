@@ -5,7 +5,7 @@ use aya_ebpf::{
     cty::c_void,
     helpers::generated::bpf_probe_read_user_str,
     macros::{map, uprobe},
-    maps::{HashMap, sock_map},
+    maps::HashMap,
     programs::ProbeContext,
 };
 use aya_log_ebpf::info;

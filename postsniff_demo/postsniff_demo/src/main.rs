@@ -60,7 +60,7 @@ async fn main() -> anyhow::Result<()> {
 
     let target_binary = match pid {
         Some(p) => format!("/proc/{}/exe", p),
-        None => "/usr/lib64/postgresql-18/bin/postgres".to_string(),
+        None => "/usr/bin/postgres".to_string(),
     };
     debug!(
         "Attempting to attach to {} with symbol pg_parse_query",

@@ -1,0 +1,17 @@
+[package]
+name = "simple-uprobe-backup-ebpf"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+simple-uprobe-backup-common = { path = "../simple-uprobe-backup-common" }
+
+aya-ebpf = { workspace = true }
+aya-log-ebpf = { workspace = true }
+
+[build-dependencies]
+which = { workspace = true }
+
+[[bin]]
+name = "simple-uprobe-backup"
+path = "src/main.rs"
