@@ -1,0 +1,17 @@
+[package]
+name = "kernel_user_ringbuf-ebpf"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+kernel_user_ringbuf-common = { path = "../kernel_user_ringbuf-common" }
+
+aya-ebpf = { workspace = true }
+aya-log-ebpf = { workspace = true }
+
+[build-dependencies]
+which = { workspace = true }
+
+[[bin]]
+name = "kernel_user_ringbuf"
+path = "src/main.rs"
